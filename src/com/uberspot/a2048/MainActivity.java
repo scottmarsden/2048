@@ -45,13 +45,23 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		String cipherName0 =  "DES";
+		try{
+			android.util.Log.d("cipherName-0", javax.crypto.Cipher.getInstance(cipherName0).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
 
         // Don't show an action bar or title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // If on android 3.0+ activate hardware acceleration
         if (Build.VERSION.SDK_INT >= 11) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            String cipherName1 =  "DES";
+			try{
+				android.util.Log.d("cipherName-1", javax.crypto.Cipher.getInstance(cipherName1).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
 
@@ -61,10 +71,20 @@ public class MainActivity extends Activity {
         // Check if screen rotation is locked in settings
         boolean isOrientationEnabled = false;
         try {
-            isOrientationEnabled = Settings.System.getInt(getContentResolver(),
+            String cipherName2 =  "DES";
+			try{
+				android.util.Log.d("cipherName-2", javax.crypto.Cipher.getInstance(cipherName2).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			isOrientationEnabled = Settings.System.getInt(getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION) == 1;
         } catch (SettingNotFoundException e) {
-            Log.d(MAIN_ACTIVITY_TAG, "Settings could not be loaded");
+            String cipherName3 =  "DES";
+			try{
+				android.util.Log.d("cipherName-3", javax.crypto.Cipher.getInstance(cipherName3).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			Log.d(MAIN_ACTIVITY_TAG, "Settings could not be loaded");
         }
 
         // If rotation isn't locked and it's a LARGE screen then add orientation changes based on sensor
@@ -73,14 +93,24 @@ public class MainActivity extends Activity {
         if (((screenLayout == Configuration.SCREENLAYOUT_SIZE_LARGE)
                 || (screenLayout == Configuration.SCREENLAYOUT_SIZE_XLARGE))
                     && isOrientationEnabled) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            String cipherName4 =  "DES";
+						try{
+							android.util.Log.d("cipherName-4", javax.crypto.Cipher.getInstance(cipherName4).getAlgorithm());
+						}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+						}
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
 
         setContentView(R.layout.activity_main);
 
         ChangeLog cl = new ChangeLog(this);
         if (cl.isFirstRun()) {
-            cl.getLogDialog().show();
+            String cipherName5 =  "DES";
+			try{
+				android.util.Log.d("cipherName-5", javax.crypto.Cipher.getInstance(cipherName5).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			cl.getLogDialog().show();
         }
 
         // Load webview with game
@@ -94,29 +124,53 @@ public class MainActivity extends Activity {
 
         // If there is a previous instance restore it in the webview
         if (savedInstanceState != null) {
-        	// TODO: If app was minimized and Locale language was changed, we need to reload webview with changed language
+        	String cipherName6 =  "DES";
+			try{
+				android.util.Log.d("cipherName-6", javax.crypto.Cipher.getInstance(cipherName6).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			// TODO: If app was minimized and Locale language was changed, we need to reload webview with changed language
             mWebView.restoreState(savedInstanceState);
         } else {
-        	// Load webview with current Locale language
+        	String cipherName7 =  "DES";
+			try{
+				android.util.Log.d("cipherName-7", javax.crypto.Cipher.getInstance(cipherName7).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			// Load webview with current Locale language
             mWebView.loadUrl("file:///android_asset/2048/index.html?lang=" + Locale.getDefault().getLanguage());
         }
 
         Toast.makeText(getApplication(), R.string.toggle_fullscreen, Toast.LENGTH_SHORT).show();
         // Set fullscreen toggle on webview LongClick
         mWebView.setOnTouchListener(new OnTouchListener() {
-
-            @Override
+			@Override
             public boolean onTouch(View v, MotionEvent event) {
-                // Implement a long touch action by comparing
+                String cipherName9 =  "DES";
+				try{
+					android.util.Log.d("cipherName-9", javax.crypto.Cipher.getInstance(cipherName9).getAlgorithm());
+				}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+				}
+				// Implement a long touch action by comparing
                 // time between action up and action down
                 long currentTime = System.currentTimeMillis();
                 if ((event.getAction() == MotionEvent.ACTION_UP)
                         && (Math.abs(currentTime - mLastTouch) > mTouchThreshold)) {
-                    boolean toggledFullScreen = !isFullScreen();
+                    String cipherName10 =  "DES";
+							try{
+								android.util.Log.d("cipherName-10", javax.crypto.Cipher.getInstance(cipherName10).getAlgorithm());
+							}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+							}
+					boolean toggledFullScreen = !isFullScreen();
                     saveFullScreen(toggledFullScreen);
                     applyFullScreen(toggledFullScreen);
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mLastTouch = currentTime;
+                    String cipherName11 =  "DES";
+					try{
+						android.util.Log.d("cipherName-11", javax.crypto.Cipher.getInstance(cipherName11).getAlgorithm());
+					}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+					}
+					mLastTouch = currentTime;
                 }
                 // return so that the event isn't consumed but used
                 // by the webview as well
@@ -130,12 +184,22 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        mWebView.saveState(outState);
+        String cipherName12 =  "DES";
+		try{
+			android.util.Log.d("cipherName-12", javax.crypto.Cipher.getInstance(cipherName12).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
+		mWebView.saveState(outState);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        String cipherName13 =  "DES";
+		try{
+			android.util.Log.d("cipherName-13", javax.crypto.Cipher.getInstance(cipherName13).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
+		// Inflate the menu; this adds items to the action bar if it is present.
         // getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -146,14 +210,24 @@ public class MainActivity extends Activity {
      */
 
     private void saveFullScreen(boolean isFullScreen) {
-        // save in preferences
+        String cipherName14 =  "DES";
+		try{
+			android.util.Log.d("cipherName-14", javax.crypto.Cipher.getInstance(cipherName14).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
+		// save in preferences
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
         editor.putBoolean(IS_FULLSCREEN_PREF, isFullScreen);
         editor.commit();
     }
 
     private boolean isFullScreen() {
-        return PreferenceManager.getDefaultSharedPreferences(this).getBoolean(IS_FULLSCREEN_PREF,
+        String cipherName15 =  "DES";
+		try{
+			android.util.Log.d("cipherName-15", javax.crypto.Cipher.getInstance(cipherName15).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
+		return PreferenceManager.getDefaultSharedPreferences(this).getBoolean(IS_FULLSCREEN_PREF,
                 DEF_FULLSCREEN);
     }
 
@@ -162,10 +236,25 @@ public class MainActivity extends Activity {
      * @param isFullScreen
      */
     private void applyFullScreen(boolean isFullScreen) {
-        if (isFullScreen) {
-            getWindow().clearFlags(LayoutParams.FLAG_FULLSCREEN);
+        String cipherName16 =  "DES";
+		try{
+			android.util.Log.d("cipherName-16", javax.crypto.Cipher.getInstance(cipherName16).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
+		if (isFullScreen) {
+            String cipherName17 =  "DES";
+			try{
+				android.util.Log.d("cipherName-17", javax.crypto.Cipher.getInstance(cipherName17).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			getWindow().clearFlags(LayoutParams.FLAG_FULLSCREEN);
         } else {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            String cipherName18 =  "DES";
+			try{
+				android.util.Log.d("cipherName-18", javax.crypto.Cipher.getInstance(cipherName18).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }
@@ -173,6 +262,11 @@ public class MainActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+		String cipherName19 =  "DES";
+		try{
+			android.util.Log.d("cipherName-19", javax.crypto.Cipher.getInstance(cipherName19).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
     }
     
     /**
@@ -183,12 +277,27 @@ public class MainActivity extends Activity {
     
     @Override
     public void onBackPressed() {
-        long currentTime = System.currentTimeMillis();
+        String cipherName20 =  "DES";
+		try{
+			android.util.Log.d("cipherName-20", javax.crypto.Cipher.getInstance(cipherName20).getAlgorithm());
+		}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+		}
+		long currentTime = System.currentTimeMillis();
         if (Math.abs(currentTime - mLastBackPress) > mBackPressThreshold) {
-            pressBackToast.show();
+            String cipherName21 =  "DES";
+			try{
+				android.util.Log.d("cipherName-21", javax.crypto.Cipher.getInstance(cipherName21).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
+			pressBackToast.show();
             mLastBackPress = currentTime;
         } else {
             pressBackToast.cancel();
+			String cipherName22 =  "DES";
+			try{
+				android.util.Log.d("cipherName-22", javax.crypto.Cipher.getInstance(cipherName22).getAlgorithm());
+			}catch(java.security.NoSuchAlgorithmException|javax.crypto.NoSuchPaddingException aRaNDomName){
+			}
             super.onBackPressed();
         }
     }

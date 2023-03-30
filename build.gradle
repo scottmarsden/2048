@@ -7,14 +7,10 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
     }
 }
 apply plugin: 'com.android.application'
-
-plugins {
-  id "org.sonarqube" version "3.5.0.2730"
-}
 
 repositories {
     mavenCentral()
@@ -45,7 +41,7 @@ android {
         }
 
         // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
+//        instrumentTest.setRoot('tests')
 
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
