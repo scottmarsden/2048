@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.7.3" sequence="0" timestamp="1681404064757" analysisTimestamp="1681404064749" release="">
+  <Project projectName="">
+    <Jar>/app</Jar>
+    <SrcDir>/app</SrcDir>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Thu, 13 Apr 2023 16:41:04 +0000" total_classes="0" referenced_classes="0" total_bugs="0" total_size="0" num_packages="0" java_version="1.8.0_362" vm_version="25.362-b09" cpu_seconds="9.66" clock_seconds="33.71" peak_mbytes="181.85" alloc_mbytes="1771.00" gc_seconds="0.11">
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="698" invocations="153" avgMicrosecondsPerInvocation="4567" maxMicrosecondsPerInvocation="64486" standardDeviationMicrosecondsPerInvocation="9864"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="675" invocations="177" avgMicrosecondsPerInvocation="3817" maxMicrosecondsPerInvocation="48767" standardDeviationMicrosecondsPerInvocation="5058"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

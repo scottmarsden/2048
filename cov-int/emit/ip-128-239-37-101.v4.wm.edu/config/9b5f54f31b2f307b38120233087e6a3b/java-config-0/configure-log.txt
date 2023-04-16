@@ -1,0 +1,27 @@
+**** BEGIN PROBE run_test_sanity ****
+**** END PROBE run_test_sanity ****
+**** BEGIN PROBE get_version_switch_output ****
+Version switch: -version
+**** BEGIN FILE source file: /var/folders/mk/06qv_8hx44sgnhtr2df940m80000gn/T/cov-scottmarsden/f82ae5bfac8df79e68eadac9ccf2f6c2/cov-scottmarsden/00d42fd946500930442c99b7615e374e/test.java
+int main() {} 
+
+**** END source file ***
+pipe_command: /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/bin/java -version 
+pipe_commands starting: /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/bin/java -version 
+**** BEGIN FILE output: /var/folders/mk/06qv_8hx44sgnhtr2df940m80000gn/T/cov-scottmarsden/f82ae5bfac8df79e68eadac9ccf2f6c2/cov-scottmarsden/00d42fd946500930442c99b7615e374e/version_output
+
+**** END FILE output ***
+**** BEGIN FILE error: 
+java version "1.8.0_202"
+Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
+Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
+
+**** END FILE error ***
+**** END PROBE get_version_switch_output ****
+Version string before regex:  java version "1.8.0_202" Java(TM) SE Runtime Environment (build 1.8.0_202-b08) Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
+Attempting to match the following regex:  openjdk
+Attempting to match the following regex:  ^Picked up .* java version
+Attempting to match the following regex:  ^java version "1\.([0-9]).*".*
+Match found. Version string after regex:  1.8
+Attempting to match the following regex:  ^java version "([0-9]+)(\.[0-9]+)?.*".*
+Compiler version found: 1.8

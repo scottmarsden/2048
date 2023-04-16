@@ -1,0 +1,4 @@
+/Users/scottmarsden/Documents/coverity/bin/cov-security-da --dir /Users/scottmarsden/Documents/GitHub/2048/cov-int 
+cov-security-da version 2022.6.0 on Darwin 21.6.0 x86_64
+Internal version numbers: 9501b3bfc3 p-2022.6-push-41
+

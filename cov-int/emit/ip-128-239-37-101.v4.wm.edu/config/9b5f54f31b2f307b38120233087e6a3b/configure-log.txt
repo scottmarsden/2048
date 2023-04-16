@@ -1,0 +1,5 @@
+Native Compiler invocation: /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/bin/java -Xdock:name=Gradle -Xdock:icon=/Users/scottmarsden/Documents/GitHub/2048/media/gradle.icns -Dorg.gradle.appname=gradlew -classpath /Users/scottmarsden/Documents/GitHub/2048/gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain build
+Working directory: /Users/scottmarsden/Documents/GitHub/2048
+Comptype: java
+* Configuring /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/bin/java as a Java compiler
+* Configuring /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/bin/javac as a Java compiler

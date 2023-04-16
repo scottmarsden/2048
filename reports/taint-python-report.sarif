@@ -1,0 +1,3457 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Python Security Analysis",
+          "rules": [
+            {
+              "id": "taint-rce",
+              "help": {
+                "text": "The software constructs all or part of an OS command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended OS command when it is sent to a downstream component.\nThis could allow attackers to execute unexpected, dangerous commands directly on the operating system. This weakness can lead to a vulnerability in environments in which the attacker does not have direct access to the operating system, such as in web applications. Alternately, if the weakness occurs in a privileged program, it could allow the attacker to specify commands that normally would not be accessible, or to call alternate commands with privileges that the attacker does not have. The problem is exacerbated if the compromised process does not follow the principle of least privilege, because the attacker-controlled commands may run with special system privileges that increases the amount of damage. There are at least two subtypes of OS command injection: The application intends to execute a single, fixed program that is under its own control. It intends to use externally-supplied inputs as arguments to that program. For example, the program might use system(nslookup [HOSTNAME]) to run nslookup and allow the user to supply a HOSTNAME, which is used as an argument. Attackers cannot prevent nslookup from executing. However, if the program does not remove command separators from the HOSTNAME argument, attackers could place the separators into the arguments, which allows them to execute their own program after nslookup has finished executing. The application accepts an input that it uses to fully select which program to run, as well as which commands to use. The application simply redirects this entire command to the operating system. For example, the program might use exec([COMMAND]) to execute the [COMMAND] that was supplied by the user. If the COMMAND is under attacker control, then the attacker can execute arbitrary commands or programs. If the command is being executed using functions like exec() and CreateProcess(), the attacker might not be able to combine multiple commands together in the same line. From a weakness standpoint, these variants represent distinct programmer errors. In the first variant, the programmer clearly intends that input from untrusted parties will be part of the arguments in the command to be executed. In the second variant, the programmer does not intend for the command to be accessible to any untrusted party, but the programmer probably has not accounted for alternate ways in which malicious attackers can provide input.",
+                "markdown": "The software constructs all or part of an OS command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended OS command when it is sent to a downstream component.\nThis could allow attackers to execute unexpected, dangerous commands directly on the operating system. This weakness can lead to a vulnerability in environments in which the attacker does not have direct access to the operating system, such as in web applications. Alternately, if the weakness occurs in a privileged program, it could allow the attacker to specify commands that normally would not be accessible, or to call alternate commands with privileges that the attacker does not have. The problem is exacerbated if the compromised process does not follow the principle of least privilege, because the attacker-controlled commands may run with special system privileges that increases the amount of damage. There are at least two subtypes of OS command injection: The application intends to execute a single, fixed program that is under its own control. It intends to use externally-supplied inputs as arguments to that program. For example, the program might use system(nslookup [HOSTNAME]) to run nslookup and allow the user to supply a HOSTNAME, which is used as an argument. Attackers cannot prevent nslookup from executing. However, if the program does not remove command separators from the HOSTNAME argument, attackers could place the separators into the arguments, which allows them to execute their own program after nslookup has finished executing. The application accepts an input that it uses to fully select which program to run, as well as which commands to use. The application simply redirects this entire command to the operating system. For example, the program might use exec([COMMAND]) to execute the [COMMAND] that was supplied by the user. If the COMMAND is under attacker control, then the attacker can execute arbitrary commands or programs. If the command is being executed using functions like exec() and CreateProcess(), the attacker might not be able to combine multiple commands together in the same line. From a weakness standpoint, these variants represent distinct programmer errors. In the first variant, the programmer clearly intends that input from untrusted parties will be part of the arguments in the command to be executed. In the second variant, the programmer does not intend for the command to be accessible to any untrusted party, but the programmer probably has not accounted for alternate ways in which malicious attackers can provide input."
+              },
+              "name": "Remote Code Execution",
+              "properties": {
+                "tags": [
+                  "Scan"
+                ],
+                "precision": "high"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "The software constructs all or part of an OS command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended OS command when it is sent to a downstream component."
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/78.html",
+              "shortDescription": {
+                "text": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')."
+              }
+            },
+            {
+              "id": "taint-traversal",
+              "help": {
+                "text": "The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.\nMany file operations are intended to take place within a restricted directory. By using special elements such as .. and / separators, attackers can escape outside of the restricted location to access files or directories that are elsewhere on the system. One of the most common special elements is the ../ sequence, which in most modern operating systems is interpreted as the parent directory of the current location. This is referred to as relative path traversal. Path traversal also covers the use of absolute pathnames such as /usr/local/bin, which may also be useful in accessing unexpected files. This is referred to as absolute path traversal. In many programming languages, the injection of a null byte (the 0 or NUL) may allow an attacker to truncate a generated filename to widen the scope of attack. For example, the software may add .txt to any pathname, thus limiting the attacker to text files, but a null injection may effectively remove this restriction.",
+                "markdown": "The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.\nMany file operations are intended to take place within a restricted directory. By using special elements such as .. and / separators, attackers can escape outside of the restricted location to access files or directories that are elsewhere on the system. One of the most common special elements is the ../ sequence, which in most modern operating systems is interpreted as the parent directory of the current location. This is referred to as relative path traversal. Path traversal also covers the use of absolute pathnames such as /usr/local/bin, which may also be useful in accessing unexpected files. This is referred to as absolute path traversal. In many programming languages, the injection of a null byte (the 0 or NUL) may allow an attacker to truncate a generated filename to widen the scope of attack. For example, the software may add .txt to any pathname, thus limiting the attacker to text files, but a null injection may effectively remove this restriction."
+              },
+              "name": "Directory Traversal",
+              "properties": {
+                "tags": [
+                  "Scan"
+                ],
+                "precision": "high"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "The software uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the software does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory."
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/22.html",
+              "shortDescription": {
+                "text": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')."
+              }
+            },
+            {
+              "id": "taint-file-write",
+              "help": {
+                "text": "The product specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors.\nWhen a resource is given a permissions setting that provides access to a wider range of actors than required, it could lead to the exposure of sensitive information, or the modification of that resource by unintended parties. This is especially dangerous when the resource is related to program configuration, execution or sensitive user data.",
+                "markdown": "The product specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors.\nWhen a resource is given a permissions setting that provides access to a wider range of actors than required, it could lead to the exposure of sensitive information, or the modification of that resource by unintended parties. This is especially dangerous when the resource is related to program configuration, execution or sensitive user data."
+              },
+              "name": "File Write",
+              "properties": {
+                "tags": [
+                  "Scan"
+                ],
+                "precision": "high"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "The product specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors."
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/732.html",
+              "shortDescription": {
+                "text": "Incorrect Permission Assignment for Critical Resource."
+              }
+            },
+            {
+              "id": "taint-ssrf",
+              "help": {
+                "text": "The web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, but it does not sufficiently ensure that the request is being sent to the expected destination.\nBy providing URLs to unexpected hosts or ports, attackers can make it appear that the server is sending the request, possibly bypassing access controls such as firewalls that prevent the attackers from accessing the URLs directly. The server can be used as a proxy to conduct port scanning of hosts in internal networks, use other URLs such as that can access documents on the system (using file://), or use other protocols such as gopher:// or tftp://, which may provide greater control over the contents of requests.",
+                "markdown": "The web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, but it does not sufficiently ensure that the request is being sent to the expected destination.\nBy providing URLs to unexpected hosts or ports, attackers can make it appear that the server is sending the request, possibly bypassing access controls such as firewalls that prevent the attackers from accessing the URLs directly. The server can be used as a proxy to conduct port scanning of hosts in internal networks, use other URLs such as that can access documents on the system (using file://), or use other protocols such as gopher:// or tftp://, which may provide greater control over the contents of requests."
+              },
+              "name": "Server-Side Request Forgery (SSRF)",
+              "properties": {
+                "tags": [
+                  "Scan"
+                ],
+                "precision": "high"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "The web server receives a URL or similar request from an upstream component and retrieves the contents of this URL, but it does not sufficiently ensure that the request is being sent to the expected destination."
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/918.html",
+              "shortDescription": {
+                "text": "Server-Side Request Forgery (SSRF)."
+              }
+            }
+          ],
+          "version": "1.0.0-scan",
+          "fullName": "Python Security Analysis"
+        }
+      },
+      "conversion": {
+        "tool": {
+          "driver": {
+            "name": "@ShiftLeft/sast-scan"
+          }
+        },
+        "invocation": {
+          "arguments": [
+            "-j",
+            "-a",
+            "e",
+            "-o",
+            "/app/reports/taint-python-report.json"
+          ],
+          "executionSuccessful": true,
+          "commandLine": "-j -a e -o /app/reports/taint-python-report.json",
+          "endTimeUtc": "2023-04-13T16:40:48Z",
+          "workingDirectory": {
+            "uri": "file:///Users/scottmarsden/Documents/GitHub/2048"
+          }
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "endTimeUtc": "2023-04-13T16:40:48Z",
+          "workingDirectory": {
+            "uri": "file:///Users/scottmarsden/Documents/GitHub/2048"
+          }
+        }
+      ],
+      "properties": {
+        "metrics": {
+          "total": 67,
+          "critical": 66,
+          "high": 1,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      "results": [
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `cmd in _bootsubprocess.py:66` used for constructing the command at `_bootsubprocess.py:80`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def check_output(cmd, **kwargs):\n"
+                  },
+                  "startLine": 66
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/_bootsubprocess.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "# _aix_support used by distutil.util calls subprocess.check_output()\ndef check_output(cmd, **kwargs):\n    if kwargs:\n        raise NotImplementedError(repr(kwargs))\n"
+                  },
+                  "endLine": 68,
+                  "startLine": 65
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "cmd",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.system(",
+              "sink_label": "~call_2 = ret_os.system(cmd)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "3789528eadc9336f",
+            "scanTagsHash": "59b3875d1849cde4",
+            "scanFileHash": "d3d2a9526649e1b1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `locals in bdb.py:565` used for constructing the command at `bdb.py:580`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def run(self, cmd, globals=None, locals=None):\n"
+                  },
+                  "startLine": 565
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/bdb.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def run(self, cmd, globals=None, locals=None):\n        \"\"\"Debug a statement executed via the exec() function.\n\n"
+                  },
+                  "endLine": 567,
+                  "startLine": 564
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "locals",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "exec(",
+              "sink_label": "~call_4 = ret_exec(cmd, globals, locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "00183c90fe924f10",
+            "scanTagsHash": "381f984d2c0b0ee9",
+            "scanFileHash": "7cab1d358fb02a3c"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `locals in bdb.py:587` used for constructing the command at `bdb.py:600`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def runeval(self, expr, globals=None, locals=None):\n"
+                  },
+                  "startLine": 587
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/bdb.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def runeval(self, expr, globals=None, locals=None):\n        \"\"\"Debug an expression executed via the eval() function.\n\n"
+                  },
+                  "endLine": 589,
+                  "startLine": 586
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "locals",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "eval(",
+              "sink_label": "~call_3 = ret_eval(expr, globals, locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "c5b22128e8e90769",
+            "scanTagsHash": "3c8a04cb660cd8ec",
+            "scanFileHash": "7cab1d358fb02a3c"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `frame in bdb.py:787` used for constructing the command at `bdb.py:816`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def effective(file, line, frame):\n"
+                  },
+                  "startLine": 787
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/bdb.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "# line of code.  Returns breakpoint number or 0 if none\ndef effective(file, line, frame):\n    \"\"\"Determine which breakpoint for this file:line is to be acted upon.\n\n"
+                  },
+                  "endLine": 789,
+                  "startLine": 786
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "frame",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "eval(",
+              "sink_label": "~call_1 = ret_eval(b.cond, frame.f_globals, frame.f_locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "60a51f8745524267",
+            "scanTagsHash": "22f0568498718fdc",
+            "scanFileHash": "7cab1d358fb02a3c"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `locals in cProfile.py:97` used for constructing the command at `cProfile.py:100`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def runctx(self, cmd, globals, locals):\n"
+                  },
+                  "startLine": 97
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/cProfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def runctx(self, cmd, globals, locals):\n        self.enable()\n        try:\n"
+                  },
+                  "endLine": 99,
+                  "startLine": 96
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "locals",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "exec(",
+              "sink_label": "~call_2 = ret_exec(cmd, globals, locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "3960cde3dbe55acb",
+            "scanTagsHash": "a09b93400baee350",
+            "scanFileHash": "5acf54691eb1e932"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `code in code.py:77` used for constructing the command at `code.py:90`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def runcode(self, code):\n"
+                  },
+                  "startLine": 77
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/code.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def runcode(self, code):\n        \"\"\"Execute a code object.\n\n"
+                  },
+                  "endLine": 79,
+                  "startLine": 76
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "code",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "exec(",
+              "sink_label": "~call_1 = ret_exec(code, self.locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "30b50e2a78288a2a",
+            "scanTagsHash": "c4174f8bb19674af",
+            "scanFileHash": "29b2c7a8e5a7ea58"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `buffering in codecs.py:871` influencing file operations in `codecs.py:905`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def open(filename, mode='r', encoding=None, errors='strict', buffering=-1):\n"
+                  },
+                  "startLine": 871
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/codecs.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef open(filename, mode='r', encoding=None, errors='strict', buffering=-1):\n\n    \"\"\" Open an encoded file using the given mode and return\n"
+                  },
+                  "endLine": 873,
+                  "startLine": 870
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "buffering",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_builtins.open(filename, mode, buffering)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "94c69c259f3f55af",
+            "scanTagsHash": "a22ea6f4279ef491",
+            "scanFileHash": "45415cf9b27d0593"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `mode in fileinput.py:398` influencing file operations in `fileinput.py:402`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def hook_compressed(filename, mode):\n"
+                  },
+                  "startLine": 398
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/fileinput.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef hook_compressed(filename, mode):\n    ext = os.path.splitext(filename)[1]\n    if ext == '.gz':\n"
+                  },
+                  "endLine": 400,
+                  "startLine": 397
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "mode",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_gzip.open(filename, mode)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "82b258d6021550f8",
+            "scanTagsHash": "4f9b82e7e7a9f89e",
+            "scanFileHash": "3d2a54fdcb801d24"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `mode in fileinput.py:398` influencing file operations in `fileinput.py:407`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def hook_compressed(filename, mode):\n"
+                  },
+                  "startLine": 398
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/fileinput.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef hook_compressed(filename, mode):\n    ext = os.path.splitext(filename)[1]\n    if ext == '.gz':\n"
+                  },
+                  "endLine": 400,
+                  "startLine": 397
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "mode",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_3 = ret_open(filename, mode)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "82b258d6021550f8",
+            "scanTagsHash": "b258a6d050d9af66",
+            "scanFileHash": "3d2a54fdcb801d24"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `file in formatter.py:430` influencing file operations in `formatter.py:434`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def test(file = None):\n"
+                  },
+                  "startLine": 430
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/formatter.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef test(file = None):\n    w = DumbWriter()\n    f = AbstractFormatter(w)\n"
+                  },
+                  "endLine": 432,
+                  "startLine": 429
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_5 = ret_open(file)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "f7fbf1101e1f41ed",
+            "scanTagsHash": "5c2dda989d7b9c92",
+            "scanFileHash": "6461e67d7a8b107a"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `compresslevel in gzip.py:25` is used in `gzip.py:58` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def open(filename, mode=\"rb\", compresslevel=_COMPRESS_LEVEL_BEST,\n"
+                  },
+                  "startLine": 25
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/gzip.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef open(filename, mode=\"rb\", compresslevel=_COMPRESS_LEVEL_BEST,\n         encoding=None, errors=None, newline=None):\n    \"\"\"Open a gzip-compressed file in binary or text mode.\n"
+                  },
+                  "endLine": 27,
+                  "startLine": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "compresslevel",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "GzipFile(",
+              "sink_label": "~call_2 = ret_GzipFile(filename, gz_mode, compresslevel)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "9d150d10d35e5c31",
+            "scanTagsHash": "d2df46f78879d931",
+            "scanFileHash": "b82b658072c285cd"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `compresslevel in gzip.py:25` is used in `gzip.py:60` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def open(filename, mode=\"rb\", compresslevel=_COMPRESS_LEVEL_BEST,\n"
+                  },
+                  "startLine": 25
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/gzip.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef open(filename, mode=\"rb\", compresslevel=_COMPRESS_LEVEL_BEST,\n         encoding=None, errors=None, newline=None):\n    \"\"\"Open a gzip-compressed file in binary or text mode.\n"
+                  },
+                  "endLine": 27,
+                  "startLine": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "compresslevel",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "GzipFile(",
+              "sink_label": "~call_4 = ret_GzipFile(None, gz_mode, compresslevel, filename)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "9d150d10d35e5c31",
+            "scanTagsHash": "7f688f5314034bef",
+            "scanFileHash": "b82b658072c285cd"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `data in gzip.py:542` is used in `gzip.py:548` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def compress(data, compresslevel=_COMPRESS_LEVEL_BEST, *, mtime=None):\n"
+                  },
+                  "startLine": 542
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/gzip.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef compress(data, compresslevel=_COMPRESS_LEVEL_BEST, *, mtime=None):\n    \"\"\"Compress data in one shot and return the compressed string.\n    Optional argument is the compression level, in range of 0-9.\n"
+                  },
+                  "endLine": 544,
+                  "startLine": 541
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "data",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "f.write(",
+              "sink_label": "~call_2 = ret_f.write(data)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "097ac6811d2bc185",
+            "scanTagsHash": "6d72ccf4a1a21ce5",
+            "scanFileHash": "b82b658072c285cd"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `file in imghdr.py:11` influencing file operations in `imghdr.py:16`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def what(file, h=None):\n"
+                  },
+                  "startLine": 11
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/imghdr.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef what(file, h=None):\n    f = None\n    try:\n"
+                  },
+                  "endLine": 13,
+                  "startLine": 10
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_open(file, rb)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "3c9e80e0ed9fb9ee",
+            "scanTagsHash": "5a38aa8616371a28",
+            "scanFileHash": "7bbfd90852fb02f8"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `name in imp.py:254` influencing file operations in `imp.py:302`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def find_module(name, path=None):\n"
+                  },
+                  "startLine": 254
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/imp.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef find_module(name, path=None):\n    \"\"\"**DEPRECATED**\n\n"
+                  },
+                  "endLine": 256,
+                  "startLine": 253
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "name",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_4 = ret_open(file_path, mode, encoding=encoding)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "90196e193238a5fb",
+            "scanTagsHash": "08a70bb5d7e3b0b9",
+            "scanFileHash": "21de7e02a1056455"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `folder in mailbox.py:451` influencing file operations in `mailbox.py:457`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def add_folder(self, folder):\n"
+                  },
+                  "startLine": 451
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/mailbox.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def add_folder(self, folder):\n        \"\"\"Create a folder and return a Maildir instance representing it.\"\"\"\n        path = os.path.join(self._path, '.' + folder)\n"
+                  },
+                  "endLine": 453,
+                  "startLine": 450
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "folder",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_6 = ret_os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY, 438)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "8862a24c35fc3643",
+            "scanTagsHash": "8d0727aee08d04a0",
+            "scanFileHash": "c163afc1b05e2567"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `folder in mailbox.py:451` used for constructing the command at `mailbox.py:457`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def add_folder(self, folder):\n"
+                  },
+                  "startLine": 451
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/mailbox.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def add_folder(self, folder):\n        \"\"\"Create a folder and return a Maildir instance representing it.\"\"\"\n        path = os.path.join(self._path, '.' + folder)\n"
+                  },
+                  "endLine": 453,
+                  "startLine": 450
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "folder",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.open(",
+              "sink_label": "~call_6 = ret_os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY, 438)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "8862a24c35fc3643",
+            "scanTagsHash": "29c22e67d7600885",
+            "scanFileHash": "c163afc1b05e2567"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `folder in mailbox.py:461` is used in `mailbox.py:478` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def remove_folder(self, folder):\n"
+                  },
+                  "startLine": 461
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/mailbox.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def remove_folder(self, folder):\n        \"\"\"Delete the named folder, which must be empty.\"\"\"\n        path = os.path.join(self._path, '.' + folder)\n"
+                  },
+                  "endLine": 463,
+                  "startLine": 460
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "folder",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.rmdir(",
+              "sink_label": "~call_6 = ret_os.rmdir(path)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "496c3490711245ff",
+            "scanTagsHash": "5666dd06c8997954",
+            "scanFileHash": "c163afc1b05e2567"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `folder in mailbox.py:1134` used for constructing the command at `mailbox.py:1139`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def remove_folder(self, folder):\n"
+                  },
+                  "startLine": 1134
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/mailbox.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def remove_folder(self, folder):\n        \"\"\"Delete the named folder, which must be empty.\"\"\"\n        path = os.path.join(self._path, folder)\n"
+                  },
+                  "endLine": 1136,
+                  "startLine": 1133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "folder",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.remove(",
+              "sink_label": "~call_3 = ret_os.remove(~call_4)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "496c3490711245ff",
+            "scanTagsHash": "2cb1d0a1e71f4d68",
+            "scanFileHash": "c163afc1b05e2567"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `folder in mailbox.py:1134` is used in `mailbox.py:1144` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def remove_folder(self, folder):\n"
+                  },
+                  "startLine": 1134
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/mailbox.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def remove_folder(self, folder):\n        \"\"\"Delete the named folder, which must be empty.\"\"\"\n        path = os.path.join(self._path, folder)\n"
+                  },
+                  "endLine": 1136,
+                  "startLine": 1133
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "folder",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.rmdir(",
+              "sink_label": "~call_5 = ret_os.rmdir(path)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "496c3490711245ff",
+            "scanTagsHash": "5970359b02dee3f2",
+            "scanFileHash": "c163afc1b05e2567"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `file in mimetypes.py:373` influencing file operations in `mimetypes.py:375`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def read_mime_types(file):\n"
+                  },
+                  "startLine": 373
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/mimetypes.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef read_mime_types(file):\n    try:\n        f = open(file, encoding='utf-8')\n"
+                  },
+                  "endLine": 375,
+                  "startLine": 372
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_open(file, encoding=utf-8)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "e63aa0ef98bd7dff",
+            "scanTagsHash": "9a01c22e12ffc25e",
+            "scanFileHash": "aa14e6508e211da6"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `dir_fd in os.py:425` influencing file operations in `os.py:464`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def fwalk(top=\".\", topdown=True, onerror=None, *, follow_symlinks=False, dir_fd=None):\n"
+                  },
+                  "startLine": 425
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/os.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def fwalk(top=\".\", topdown=True, onerror=None, *, follow_symlinks=False, dir_fd=None):\n        \"\"\"Directory tree generator.\n\n"
+                  },
+                  "endLine": 427,
+                  "startLine": 424
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "dir_fd",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_3 = ret_open(top, O_RDONLY, dir_fd=dir_fd)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "5eba7d60223d411f",
+            "scanTagsHash": "7d6870317b5eb04b",
+            "scanFileHash": "69be3c8742a3eb5f"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `buffering in os.py:974` used for constructing the command at `os.py:983`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def popen(cmd, mode=\"r\", buffering=-1):\n"
+                  },
+                  "startLine": 974
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/os.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "# Supply os.popen()\ndef popen(cmd, mode=\"r\", buffering=-1):\n    if not isinstance(cmd, str):\n        raise TypeError(\"invalid cmd type (%s, expected string)\" % type(cmd))\n"
+                  },
+                  "endLine": 976,
+                  "startLine": 973
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "buffering",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_1 = ret_subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, bufsize=buffering)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "69fda3d7245b3abb",
+            "scanTagsHash": "df0182c4f4e5ee8d",
+            "scanFileHash": "69be3c8742a3eb5f"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `buffering in os.py:974` used for constructing the command at `os.py:989`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def popen(cmd, mode=\"r\", buffering=-1):\n"
+                  },
+                  "startLine": 974
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/os.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "# Supply os.popen()\ndef popen(cmd, mode=\"r\", buffering=-1):\n    if not isinstance(cmd, str):\n        raise TypeError(\"invalid cmd type (%s, expected string)\" % type(cmd))\n"
+                  },
+                  "endLine": 976,
+                  "startLine": 973
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "buffering",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_6 = ret_subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, bufsize=buffering)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "69fda3d7245b3abb",
+            "scanTagsHash": "f83437447e56e201",
+            "scanFileHash": "69be3c8742a3eb5f"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `fd in os.py:1019` influencing file operations in `os.py:1023`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def fdopen(fd, *args, **kwargs):\n"
+                  },
+                  "startLine": 1019
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/os.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "# Supply os.fdopen()\ndef fdopen(fd, *args, **kwargs):\n    if not isinstance(fd, int):\n        raise TypeError(\"invalid fd type (%s, expected integer)\" % type(fd))\n"
+                  },
+                  "endLine": 1021,
+                  "startLine": 1018
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "fd",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_io.open(fd, *args, kwargs)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "8db182d646dae1e4",
+            "scanTagsHash": "2d7c49277ece6836",
+            "scanFileHash": "69be3c8742a3eb5f"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `newline in pathlib.py:1236` influencing file operations in `pathlib.py:1242`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, mode='r', buffering=-1, encoding=None,\n"
+                  },
+                  "startLine": 1236
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pathlib.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, mode='r', buffering=-1, encoding=None,\n             errors=None, newline=None):\n        \"\"\"\n"
+                  },
+                  "endLine": 1238,
+                  "startLine": 1235
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "newline",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_io.open(self, mode, buffering, encoding, errors, newline, opener=self._opener)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "0eb2422ea5a96dec",
+            "scanTagsHash": "0e437bc488d7a8c7",
+            "scanFileHash": "097995e8723caf26"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `data in pathlib.py:1268` is used in `pathlib.py:1276` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def write_text(self, data, encoding=None, errors=None):\n"
+                  },
+                  "startLine": 1268
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pathlib.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def write_text(self, data, encoding=None, errors=None):\n        \"\"\"\n        Open the file in text mode, write to it, and close the file.\n"
+                  },
+                  "endLine": 1270,
+                  "startLine": 1267
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "data",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "f.write(",
+              "sink_label": "~call_1 = ret_f.write(data)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "54839d5dfd7db678",
+            "scanTagsHash": "3a828756db5516bd",
+            "scanFileHash": "097995e8723caf26"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `filename in pdb.py:94` influencing file operations in `pdb.py:97`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def find_function(funcname, filename):\n"
+                  },
+                  "startLine": 94
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pdb.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef find_function(funcname, filename):\n    cre = re.compile(r'def\\s+%s\\s*[(]' % re.escape(funcname))\n    try:\n"
+                  },
+                  "endLine": 96,
+                  "startLine": 93
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "filename",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_2 = ret_tokenize.open(filename)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "d9d966aa10cf0021",
+            "scanTagsHash": "e73d062bee94716f",
+            "scanFileHash": "265e6fbd8fd43f3b"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `file in pipes.py:152` influencing file operations in `pipes.py:156`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open_r(self, file):\n"
+                  },
+                  "startLine": 152
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pipes.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open_r(self, file):\n        \"\"\"t.open_r(file) and t.open_w(file) implement\n        t.open(file, 'r') and t.open(file, 'w') respectively.\"\"\"\n"
+                  },
+                  "endLine": 154,
+                  "startLine": 151
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_open(file, r)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "c213b9a1318b5ee8",
+            "scanTagsHash": "dff3bb6e1958470c",
+            "scanFileHash": "7658887899e2018e"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `file in pipes.py:162` influencing file operations in `pipes.py:164`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open_w(self, file):\n"
+                  },
+                  "startLine": 162
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pipes.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open_w(self, file):\n        if not self.steps:\n            return open(file, 'w')\n"
+                  },
+                  "endLine": 164,
+                  "startLine": 161
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_open(file, w)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67eafe0d3fd35068",
+            "scanTagsHash": "aafb7cbb936b5ef8",
+            "scanFileHash": "7658887899e2018e"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `outfile in pipes.py:170` used for constructing the command at `pipes.py:171`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def copy(self, infile, outfile):\n"
+                  },
+                  "startLine": 170
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pipes.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def copy(self, infile, outfile):\n        return os.system(self.makepipeline(infile, outfile))\n\n"
+                  },
+                  "endLine": 172,
+                  "startLine": 169
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "outfile",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.system(",
+              "sink_label": "~call_1 = ret_os.system(~call_2)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "2e6920430ceb49ca",
+            "scanTagsHash": "9cdbdf7ff6d96b15",
+            "scanFileHash": "7658887899e2018e"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `locals in profile.py:418` used for constructing the command at `profile.py:422`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def runctx(self, cmd, globals, locals):\n"
+                  },
+                  "startLine": 418
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/profile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def runctx(self, cmd, globals, locals):\n        self.set_cmd(cmd)\n        sys.setprofile(self.dispatcher)\n"
+                  },
+                  "endLine": 420,
+                  "startLine": 417
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "locals",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "exec(",
+              "sink_label": "~call_3 = ret_exec(cmd, globals, locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "3960cde3dbe55acb",
+            "scanTagsHash": "bd89809705ef8119",
+            "scanFileHash": "7942bf22477db6c8"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `tty_name in pty.py:62` influencing file operations in `pty.py:68`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def slave_open(tty_name):\n"
+                  },
+                  "startLine": 62
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pty.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef slave_open(tty_name):\n    \"\"\"slave_open(tty_name) -> slave_fd\n    Open the pty slave and acquire the controlling terminal, returning\n"
+                  },
+                  "endLine": 64,
+                  "startLine": 61
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "tty_name",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_os.open(tty_name, os.O_RDWR)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "7783366099dfdab1",
+            "scanTagsHash": "1690e4655d0332ff",
+            "scanFileHash": "9e6f0e34f6b29c5b"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `tty_name in pty.py:62` used for constructing the command at `pty.py:68`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def slave_open(tty_name):\n"
+                  },
+                  "startLine": 62
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pty.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef slave_open(tty_name):\n    \"\"\"slave_open(tty_name) -> slave_fd\n    Open the pty slave and acquire the controlling terminal, returning\n"
+                  },
+                  "endLine": 64,
+                  "startLine": 61
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "tty_name",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.open(",
+              "sink_label": "~call_1 = ret_os.open(tty_name, os.O_RDWR)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "7783366099dfdab1",
+            "scanTagsHash": "52badcdd8a344c13",
+            "scanFileHash": "9e6f0e34f6b29c5b"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `filename in pydoc.py:343` influencing file operations in `pydoc.py:359`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def synopsis(filename, cache={}):\n"
+                  },
+                  "startLine": 343
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pydoc.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef synopsis(filename, cache={}):\n    \"\"\"Get the one-line summary out of a module file.\"\"\"\n    mtime = os.stat(filename).st_mtime\n"
+                  },
+                  "endLine": 345,
+                  "startLine": 342
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "filename",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_3 = ret_tokenize.open(filename)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "55f166a2c9c446e8",
+            "scanTagsHash": "10b316d50d634734",
+            "scanFileHash": "0f5456cf8e239e8e"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `cmd in pydoc.py:1594` used for constructing the command at `pydoc.py:1597`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def pipepager(text, cmd):\n"
+                  },
+                  "startLine": 1594
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pydoc.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef pipepager(text, cmd):\n    \"\"\"Page through text by feeding it to another program.\"\"\"\n    import subprocess\n"
+                  },
+                  "endLine": 1596,
+                  "startLine": 1593
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "cmd",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_1 = ret_subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "5ddb6b7d80cbeca7",
+            "scanTagsHash": "a24553365da887eb",
+            "scanFileHash": "0f5456cf8e239e8e"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `cmd in pydoc.py:1617` used for constructing the command at `pydoc.py:1624`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def tempfilepager(text, cmd):\n"
+                  },
+                  "startLine": 1617
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/pydoc.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef tempfilepager(text, cmd):\n    \"\"\"Page through text by invoking a program on a temporary file.\"\"\"\n    import tempfile\n"
+                  },
+                  "endLine": 1619,
+                  "startLine": 1616
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "cmd",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.system(",
+              "sink_label": "~call_3 = ret_os.system(cmd +  \" + filename + \")",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "b56b377215dfc5ed",
+            "scanTagsHash": "87456ab747366d68",
+            "scanFileHash": "0f5456cf8e239e8e"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `newfile in shlex.py:279` influencing file operations in `shlex.py:286`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def sourcehook(self, newfile):\n"
+                  },
+                  "startLine": 279
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/shlex.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def sourcehook(self, newfile):\n        \"Hook called on a filename to be sourced.\"\n        if newfile[0] == '\"':\n"
+                  },
+                  "endLine": 281,
+                  "startLine": 278
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "newfile",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "ret_sourcehook = (newfile, open(newfile, r))",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "e55cd921d9a28314",
+            "scanTagsHash": "64c743333ad01a1f",
+            "scanFileHash": "f44d49a3ef20ce1c"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `f in sndhdr.py:75` influencing file operations in `sndhdr.py:87`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def test_aifc(h, f):\n"
+                  },
+                  "startLine": 75
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/sndhdr.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef test_aifc(h, f):\n    import aifc\n    if not h.startswith(b'FORM'):\n"
+                  },
+                  "endLine": 77,
+                  "startLine": 74
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "f",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_2 = ret_aifc.open(f, r)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "5fffd5f2641590ed",
+            "scanTagsHash": "18d3643470817966",
+            "scanFileHash": "b31e802c2ba8dd08"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `f in sndhdr.py:156` influencing file operations in `sndhdr.py:163`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def test_wav(h, f):\n"
+                  },
+                  "startLine": 156
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/sndhdr.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef test_wav(h, f):\n    import wave\n    # 'RIFF' <len> 'WAVE' 'fmt ' <len>\n"
+                  },
+                  "endLine": 158,
+                  "startLine": 155
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "f",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_2 = ret_wave.open(f, r)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "eae1f418de3132af",
+            "scanTagsHash": "f5444c2c888d996d",
+            "scanFileHash": "b31e802c2ba8dd08"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `prefix in sre_constants.py:218` is used in `sre_constants.py:221` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def dump(f, d, prefix):\n"
+                  },
+                  "startLine": 218
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/sre_constants.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "if __name__ == \"__main__\":\n    def dump(f, d, prefix):\n        items = sorted(d)\n        for item in items:\n"
+                  },
+                  "endLine": 220,
+                  "startLine": 217
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "prefix",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "f.write(",
+              "sink_label": "~call_2 = ret_f.write(#define %s_%s %d\n % (prefix, item, item))",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "d423a98e826f4873",
+            "scanTagsHash": "08e5b8bc1f3a1e36",
+            "scanFileHash": "9c93cc0ed3f77ff1"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `targetpath in tarfile.py:2175` is used in `tarfile.py:2181` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def makedir(self, tarinfo, targetpath):\n"
+                  },
+                  "startLine": 2175
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tarfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def makedir(self, tarinfo, targetpath):\n        \"\"\"Make a directory called targetpath.\n        \"\"\"\n"
+                  },
+                  "endLine": 2177,
+                  "startLine": 2174
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "targetpath",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.mkdir(",
+              "sink_label": "~call_1 = ret_os.mkdir(targetpath, 448)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "ded6191a7408d352",
+            "scanTagsHash": "34a39a89f7bcd100",
+            "scanFileHash": "efeeba5006cefc44"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2232` used for constructing the command at `tarfile.py:2242`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def makelink(self, tarinfo, targetpath):\n"
+                  },
+                  "startLine": 2232
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tarfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def makelink(self, tarinfo, targetpath):\n        \"\"\"Make a (symbolic) link called targetpath. If it cannot be created\n          (platform limitation), we try to make a copy of the referenced file\n"
+                  },
+                  "endLine": 2234,
+                  "startLine": 2231
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "targetpath",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.unlink(",
+              "sink_label": "~call_1 = ret_os.unlink(targetpath)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "99703f1851df55f1",
+            "scanTagsHash": "b0036822a67ab285",
+            "scanFileHash": "efeeba5006cefc44"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `targetpath in tarfile.py:2232` is used in `tarfile.py:2247` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def makelink(self, tarinfo, targetpath):\n"
+                  },
+                  "startLine": 2232
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tarfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def makelink(self, tarinfo, targetpath):\n        \"\"\"Make a (symbolic) link called targetpath. If it cannot be created\n          (platform limitation), we try to make a copy of the referenced file\n"
+                  },
+                  "endLine": 2234,
+                  "startLine": 2231
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "targetpath",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.link(",
+              "sink_label": "~call_3 = ret_os.link(tarinfo._link_target, targetpath)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "99703f1851df55f1",
+            "scanTagsHash": "c96556248ca6d90b",
+            "scanFileHash": "efeeba5006cefc44"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2258` used for constructing the command at `tarfile.py:2281`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def chown(self, tarinfo, targetpath, numeric_owner):\n"
+                  },
+                  "startLine": 2258
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tarfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def chown(self, tarinfo, targetpath, numeric_owner):\n        \"\"\"Set owner of targetpath according to tarinfo. If numeric_owner\n           is True, use .gid/.uid instead of .gname/.uname. If numeric_owner\n"
+                  },
+                  "endLine": 2260,
+                  "startLine": 2257
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "targetpath",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.lchown(",
+              "sink_label": "~call_1 = ret_os.lchown(targetpath, u, g)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "d0671a70c039ef10",
+            "scanTagsHash": "c6ee3cba384b709f",
+            "scanFileHash": "efeeba5006cefc44"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2258` used for constructing the command at `tarfile.py:2283`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def chown(self, tarinfo, targetpath, numeric_owner):\n"
+                  },
+                  "startLine": 2258
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tarfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def chown(self, tarinfo, targetpath, numeric_owner):\n        \"\"\"Set owner of targetpath according to tarinfo. If numeric_owner\n           is True, use .gid/.uid instead of .gname/.uname. If numeric_owner\n"
+                  },
+                  "endLine": 2260,
+                  "startLine": 2257
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "targetpath",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.chown(",
+              "sink_label": "~call_2 = ret_os.chown(targetpath, u, g)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "d0671a70c039ef10",
+            "scanTagsHash": "153426fc8cc76cf9",
+            "scanFileHash": "efeeba5006cefc44"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2295` used for constructing the command at `tarfile.py:2301`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def utime(self, tarinfo, targetpath):\n"
+                  },
+                  "startLine": 2295
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tarfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def utime(self, tarinfo, targetpath):\n        \"\"\"Set modification time of targetpath according to tarinfo.\n        \"\"\"\n"
+                  },
+                  "endLine": 2297,
+                  "startLine": 2294
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "targetpath",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.utime(",
+              "sink_label": "~call_1 = ret_os.utime(targetpath, (tarinfo.mtime, tarinfo.mtime))",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "62c43510a222a7df",
+            "scanTagsHash": "3e1b2785c461567c",
+            "scanFileHash": "efeeba5006cefc44"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Server-Side Request Forgery (SSRF) or Exfiltration with data from `timeout in telnetlib.py:220` reaching `telnetlib.py:235`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, host, port=0, timeout=socket._GLOBAL_DEFAULT_TIMEOUT):\n"
+                  },
+                  "startLine": 220
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/telnetlib.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, host, port=0, timeout=socket._GLOBAL_DEFAULT_TIMEOUT):\n        \"\"\"Connect to a host.\n\n"
+                  },
+                  "endLine": 222,
+                  "startLine": 219
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "HIGH",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "timeout",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "create_connection(",
+              "sink_label": "~call_2 = ret_socket.create_connection((host, port), timeout)",
+              "sink_type": "RequestSend"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "6e6b9fc55573004a",
+            "scanTagsHash": "cb326a91cf462068",
+            "scanFileHash": "58618830cb26f8f3"
+          },
+          "ruleId": "taint-ssrf",
+          "ruleIndex": 3
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `filename in tokenize.py:388` influencing file operations in `tokenize.py:392`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def open(filename):\n"
+                  },
+                  "startLine": 388
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/tokenize.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef open(filename):\n    \"\"\"Open a file in read only mode using the encoding detected by\n    detect_encoding().\n"
+                  },
+                  "endLine": 390,
+                  "startLine": 387
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "filename",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_builtins.open(filename, rb)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "fc8a1fb9059f31c8",
+            "scanTagsHash": "edf748fba57c94f9",
+            "scanFileHash": "cc1647a9acb5ed0a"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `coverdir in trace.py:204` is used in `trace.py:261` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def write_results(self, show_missing=True, summary=False, coverdir=None):\n"
+                  },
+                  "startLine": 204
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/trace.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def write_results(self, show_missing=True, summary=False, coverdir=None):\n        \"\"\"\n        Write the coverage results.\n"
+                  },
+                  "endLine": 206,
+                  "startLine": 203
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "coverdir",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.makedirs(",
+              "sink_label": "~call_16 = ret_os.makedirs(dir)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "1f21c0df9eb2a633",
+            "scanTagsHash": "c21d70a47759254a",
+            "scanFileHash": "198664fabb1944b5"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `encoding in trace.py:296` influencing file operations in `trace.py:301`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def write_results_file(self, path, lines, lnotab, lines_hit, encoding=None):\n"
+                  },
+                  "startLine": 296
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/trace.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def write_results_file(self, path, lines, lnotab, lines_hit, encoding=None):\n        \"\"\"Return a coverage results file in path.\"\"\"\n        # ``lnotab`` is a dict of executable lines, or a line number \"table\"\n"
+                  },
+                  "endLine": 298,
+                  "startLine": 295
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "encoding",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_open(path, w, encoding=encoding)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "3ceda1195b1cad28",
+            "scanTagsHash": "c9db87e8b4cc25fa",
+            "scanFileHash": "198664fabb1944b5"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `locals in trace.py:443` used for constructing the command at `trace.py:450`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def runctx(self, cmd, globals=None, locals=None):\n"
+                  },
+                  "startLine": 443
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/trace.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def runctx(self, cmd, globals=None, locals=None):\n        if globals is None: globals = {}\n        if locals is None: locals = {}\n"
+                  },
+                  "endLine": 445,
+                  "startLine": 442
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "locals",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "exec(",
+              "sink_label": "~call_3 = ret_exec(cmd, globals, locals)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "17b8349102ce683c",
+            "scanTagsHash": "bd89809705ef8119",
+            "scanFileHash": "198664fabb1944b5"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `in_file in uu.py:42` influencing file operations in `uu.py:59`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def encode(in_file, out_file, name=None, mode=None, *, backtick=False):\n"
+                  },
+                  "startLine": 42
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/uu.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef encode(in_file, out_file, name=None, mode=None, *, backtick=False):\n    \"\"\"Uuencode file\"\"\"\n    #\n"
+                  },
+                  "endLine": 44,
+                  "startLine": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "in_file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_2 = ret_open(in_file, rb)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "32035ff8f1c9ec4a",
+            "scanTagsHash": "5875da0262d55669",
+            "scanFileHash": "a8353fd07f2d6de7"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `out_file in uu.py:42` influencing file operations in `uu.py:67`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def encode(in_file, out_file, name=None, mode=None, *, backtick=False):\n"
+                  },
+                  "startLine": 42
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/uu.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef encode(in_file, out_file, name=None, mode=None, *, backtick=False):\n    \"\"\"Uuencode file\"\"\"\n    #\n"
+                  },
+                  "endLine": 44,
+                  "startLine": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "out_file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_3 = ret_open(out_file, wb)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "32035ff8f1c9ec4a",
+            "scanTagsHash": "32116d1b6ec75e34",
+            "scanFileHash": "a8353fd07f2d6de7"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `in_file in uu.py:100` influencing file operations in `uu.py:109`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def decode(in_file, out_file=None, mode=None, quiet=False):\n"
+                  },
+                  "startLine": 100
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/uu.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef decode(in_file, out_file=None, mode=None, quiet=False):\n    \"\"\"Decode uuencoded file\"\"\"\n    #\n"
+                  },
+                  "endLine": 102,
+                  "startLine": 99
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "in_file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_1 = ret_open(in_file, rb)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "cb1423e840301609",
+            "scanTagsHash": "1a723edc862a040f",
+            "scanFileHash": "a8353fd07f2d6de7"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `out_file in uu.py:100` influencing file operations in `uu.py:142`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def decode(in_file, out_file=None, mode=None, quiet=False):\n"
+                  },
+                  "startLine": 100
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/uu.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef decode(in_file, out_file=None, mode=None, quiet=False):\n    \"\"\"Decode uuencoded file\"\"\"\n    #\n"
+                  },
+                  "endLine": 102,
+                  "startLine": 99
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "out_file",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_8 = ret_open(out_file, wb)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "cb1423e840301609",
+            "scanTagsHash": "9b421dc0ed64e1ba",
+            "scanFileHash": "a8353fd07f2d6de7"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:172` used for constructing the command at `webbrowser.py:178`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 172
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        sys.audit(\"webbrowser.open\", url)\n        cmdline = [self.name] + [arg.replace(\"%s\", url)\n"
+                  },
+                  "endLine": 174,
+                  "startLine": 171
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_2 = ret_subprocess.Popen(cmdline)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "d8e58afc1ffcec02",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:172` used for constructing the command at `webbrowser.py:180`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 172
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        sys.audit(\"webbrowser.open\", url)\n        cmdline = [self.name] + [arg.replace(\"%s\", url)\n"
+                  },
+                  "endLine": 174,
+                  "startLine": 171
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_3 = ret_subprocess.Popen(cmdline, close_fds=True)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "915f151ae35bd997",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:190` used for constructing the command at `webbrowser.py:196`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 190
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        cmdline = [self.name] + [arg.replace(\"%s\", url)\n                                 for arg in self.args]\n"
+                  },
+                  "endLine": 192,
+                  "startLine": 189
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_2 = ret_subprocess.Popen(cmdline)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "d8e58afc1ffcec02",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:190` used for constructing the command at `webbrowser.py:198`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 190
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        cmdline = [self.name] + [arg.replace(\"%s\", url)\n                                 for arg in self.args]\n"
+                  },
+                  "endLine": 192,
+                  "startLine": 189
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_3 = ret_subprocess.Popen(cmdline, close_fds=True, start_new_session=True)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "8efffac722483a51",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:369`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 358
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        sys.audit(\"webbrowser.open\", url)\n        # XXX Currently I know no way to prevent KFM from opening a new win.\n"
+                  },
+                  "endLine": 360,
+                  "startLine": 357
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_2 = ret_subprocess.Popen([kfmclient, action, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "4b4f642765acc526",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:381`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 358
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        sys.audit(\"webbrowser.open\", url)\n        # XXX Currently I know no way to prevent KFM from opening a new win.\n"
+                  },
+                  "endLine": 360,
+                  "startLine": 357
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_4 = ret_subprocess.Popen([konqueror, --silent, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull, start_new_session=True)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "a2a2a28fe32c58aa",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:394`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 358
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, url, new=0, autoraise=True):\n        sys.audit(\"webbrowser.open\", url)\n        # XXX Currently I know no way to prevent KFM from opening a new win.\n"
+                  },
+                  "endLine": 360,
+                  "startLine": 357
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "subprocess.Popen(",
+              "sink_label": "~call_5 = ret_subprocess.Popen([kfm, -d, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull, start_new_session=True)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "bff56d08c8bec613",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Remote Code Execution via shell with user data from `url in webbrowser.py:600` used for constructing the command at `webbrowser.py:603`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "        def open(self, url, new=0, autoraise=True):\n"
+                  },
+                  "startLine": 600
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/webbrowser.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "    class WindowsDefault(BaseBrowser):\n        def open(self, url, new=0, autoraise=True):\n            sys.audit(\"webbrowser.open\", url)\n            try:\n"
+                  },
+                  "endLine": 602,
+                  "startLine": 599
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "url",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "os.startfile(",
+              "sink_label": "~call_2 = ret_os.startfile(url)",
+              "sink_type": "RemoteCodeExecution"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67c992df05cfd65e",
+            "scanTagsHash": "90972bfc0f28ecce",
+            "scanFileHash": "a52ea294ffdb97f1"
+          },
+          "ruleId": "taint-rce",
+          "ruleIndex": 0
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `source in zipapp.py:76` is used in `zipapp.py:101` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def create_archive(source, target=None, interpreter=None, main=None,\n"
+                  },
+                  "startLine": 76
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/zipapp.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef create_archive(source, target=None, interpreter=None, main=None,\n                   filter=None, compressed=False):\n    \"\"\"Create an application archive from SOURCE.\n"
+                  },
+                  "endLine": 78,
+                  "startLine": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "source",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "Path(",
+              "sink_label": "~call_1 = ret_pathlib.Path(source)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67405e3788c56814",
+            "scanTagsHash": "f2ab1325e821b499",
+            "scanFileHash": "c53ca48ad40b7385"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "User data from `target in zipapp.py:76` is used in `zipapp.py:132` for file operations."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "def create_archive(source, target=None, interpreter=None, main=None,\n"
+                  },
+                  "startLine": 76
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/zipapp.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\ndef create_archive(source, target=None, interpreter=None, main=None,\n                   filter=None, compressed=False):\n    \"\"\"Create an application archive from SOURCE.\n"
+                  },
+                  "endLine": 78,
+                  "startLine": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "target",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "Path(",
+              "sink_label": "~call_18 = ret_pathlib.Path(target)",
+              "sink_type": "FileSystem"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "67405e3788c56814",
+            "scanTagsHash": "cbaf5ecf799690ce",
+            "scanFileHash": "c53ca48ad40b7385"
+          },
+          "ruleId": "taint-file-write",
+          "ruleIndex": 2
+        },
+        {
+          "message": {
+            "markdown": "",
+            "text": "Exfiltration of data (Path Traversal) due to user data from `mode in zipfile.py:2298` influencing file operations in `zipfile.py:2306`."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "snippet": {
+                    "text": "    def open(self, mode='r', *args, **kwargs):\n"
+                  },
+                  "startLine": 2298
+                },
+                "artifactLocation": {
+                  "uri": "file:///Users/scottmarsden/Documents/GitHub/2048/build/lib/python3.9/zipfile.py"
+                },
+                "contextRegion": {
+                  "snippet": {
+                    "text": "\n    def open(self, mode='r', *args, **kwargs):\n        \"\"\"\n        Open this entry as text or binary following the semantics\n"
+                  },
+                  "endLine": 2300,
+                  "startLine": 2297
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_confidence": "HIGH",
+            "issue_severity": "CRITICAL",
+            "issue_tags": {
+              "source_trigger_word": "Framework function URL parameter",
+              "source_label": "mode",
+              "source_type": "Framework_Parameter",
+              "sink_trigger_word": "open(",
+              "sink_label": "~call_2 = ret_self.root.open(self.at, zip_mode, pwd=pwd)",
+              "sink_type": "Exfiltration"
+            }
+          },
+          "baselineState": "new",
+          "partialFingerprints": {
+            "scanPrimaryLocationHash": "e3784f9490111527",
+            "scanTagsHash": "c95b45b1ad3594d6",
+            "scanFileHash": "ad9541a04555dccb"
+          },
+          "ruleId": "taint-traversal",
+          "ruleIndex": 1
+        }
+      ],
+      "automationDetails": {
+        "description": {
+          "text": "Static Analysis Security Test results using @ShiftLeft/sast-scan"
+        },
+        "guid": "e6ac7d6b-c23e-4008-8e88-a66ca654a51b"
+      },
+      "versionControlProvenance": [
+        {
+          "branch": "master",
+          "repositoryUri": "https://github.com/scottmarsden/2048",
+          "revisionId": "dcae948ae6dd152d697b1afd06bba8d68953562d"
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "inlineExternalProperties": [
+    {
+      "guid": "e6ac7d6b-c23e-4008-8e88-a66ca654a51b",
+      "runGuid": "6dc7b9d7-9ea3-48ac-9aa7-94d98e716d89"
+    }
+  ]
+}

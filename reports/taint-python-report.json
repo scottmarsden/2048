@@ -1,0 +1,2015 @@
+{
+  "generated_at": "2023-04-13T16:40:47Z",
+  "vulnerabilities": [
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "cmd",
+        "line_number": 66,
+        "path": "/app/build/lib/python3.9/_bootsubprocess.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "cmd",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_os.system(cmd)",
+        "line_number": 80,
+        "path": "/app/build/lib/python3.9/_bootsubprocess.py"
+      },
+      "sink_trigger_word": "os.system(",
+      "sink_label": "~call_2 = ret_os.system(cmd)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_ .join(cmd)",
+          "line_number": 75,
+          "path": "/app/build/lib/python3.9/_bootsubprocess.py"
+        },
+        {
+          "label": "cmd = ~call_1",
+          "line_number": 75,
+          "path": "/app/build/lib/python3.9/_bootsubprocess.py"
+        },
+        {
+          "label": "cmd = f'{cmd} >{tmp_filename}'",
+          "line_number": 76,
+          "path": "/app/build/lib/python3.9/_bootsubprocess.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `cmd in _bootsubprocess.py:66` used for constructing the command at `_bootsubprocess.py:80`.",
+      "short_description": "Remote Code Execution via shell with user data from `cmd in _bootsubprocess.py:66` used for constructing the command at `_bootsubprocess.py:80`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "locals",
+        "line_number": 565,
+        "path": "/app/build/lib/python3.9/bdb.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "locals",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_4 = ret_exec(cmd, globals, locals)",
+        "line_number": 580,
+        "path": "/app/build/lib/python3.9/bdb.py"
+      },
+      "sink_trigger_word": "exec(",
+      "sink_label": "~call_4 = ret_exec(cmd, globals, locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `locals in bdb.py:565` used for constructing the command at `bdb.py:580`.",
+      "short_description": "Remote Code Execution via shell with user data from `locals in bdb.py:565` used for constructing the command at `bdb.py:580`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "locals",
+        "line_number": 587,
+        "path": "/app/build/lib/python3.9/bdb.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "locals",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_eval(expr, globals, locals)",
+        "line_number": 600,
+        "path": "/app/build/lib/python3.9/bdb.py"
+      },
+      "sink_trigger_word": "eval(",
+      "sink_label": "~call_3 = ret_eval(expr, globals, locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `locals in bdb.py:587` used for constructing the command at `bdb.py:600`.",
+      "short_description": "Remote Code Execution via shell with user data from `locals in bdb.py:587` used for constructing the command at `bdb.py:600`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "frame",
+        "line_number": 787,
+        "path": "/app/build/lib/python3.9/bdb.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "frame",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_eval(b.cond, frame.f_globals, frame.f_locals)",
+        "line_number": 816,
+        "path": "/app/build/lib/python3.9/bdb.py"
+      },
+      "sink_trigger_word": "eval(",
+      "sink_label": "~call_1 = ret_eval(b.cond, frame.f_globals, frame.f_locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `frame in bdb.py:787` used for constructing the command at `bdb.py:816`.",
+      "short_description": "Remote Code Execution via shell with user data from `frame in bdb.py:787` used for constructing the command at `bdb.py:816`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "locals",
+        "line_number": 97,
+        "path": "/app/build/lib/python3.9/cProfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "locals",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_exec(cmd, globals, locals)",
+        "line_number": 100,
+        "path": "/app/build/lib/python3.9/cProfile.py"
+      },
+      "sink_trigger_word": "exec(",
+      "sink_label": "~call_2 = ret_exec(cmd, globals, locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `locals in cProfile.py:97` used for constructing the command at `cProfile.py:100`.",
+      "short_description": "Remote Code Execution via shell with user data from `locals in cProfile.py:97` used for constructing the command at `cProfile.py:100`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "code",
+        "line_number": 77,
+        "path": "/app/build/lib/python3.9/code.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "code",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_exec(code, self.locals)",
+        "line_number": 90,
+        "path": "/app/build/lib/python3.9/code.py"
+      },
+      "sink_trigger_word": "exec(",
+      "sink_label": "~call_1 = ret_exec(code, self.locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `code in code.py:77` used for constructing the command at `code.py:90`.",
+      "short_description": "Remote Code Execution via shell with user data from `code in code.py:77` used for constructing the command at `code.py:90`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "buffering",
+        "line_number": 871,
+        "path": "/app/build/lib/python3.9/codecs.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "buffering",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_builtins.open(filename, mode, buffering)",
+        "line_number": 905,
+        "path": "/app/build/lib/python3.9/codecs.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_builtins.open(filename, mode, buffering)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `buffering in codecs.py:871` influencing file operations in `codecs.py:905`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `buffering in codecs.py:871` influencing file operations in `codecs.py:905`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "mode",
+        "line_number": 398,
+        "path": "/app/build/lib/python3.9/fileinput.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "mode",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_gzip.open(filename, mode)",
+        "line_number": 402,
+        "path": "/app/build/lib/python3.9/fileinput.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_gzip.open(filename, mode)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `mode in fileinput.py:398` influencing file operations in `fileinput.py:402`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `mode in fileinput.py:398` influencing file operations in `fileinput.py:402`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "mode",
+        "line_number": 398,
+        "path": "/app/build/lib/python3.9/fileinput.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "mode",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_open(filename, mode)",
+        "line_number": 407,
+        "path": "/app/build/lib/python3.9/fileinput.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_3 = ret_open(filename, mode)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `mode in fileinput.py:398` influencing file operations in `fileinput.py:407`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `mode in fileinput.py:398` influencing file operations in `fileinput.py:407`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "file",
+        "line_number": 430,
+        "path": "/app/build/lib/python3.9/formatter.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_5 = ret_open(file)",
+        "line_number": 434,
+        "path": "/app/build/lib/python3.9/formatter.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_5 = ret_open(file)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `file in formatter.py:430` influencing file operations in `formatter.py:434`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `file in formatter.py:430` influencing file operations in `formatter.py:434`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "compresslevel",
+        "line_number": 25,
+        "path": "/app/build/lib/python3.9/gzip.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "compresslevel",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_GzipFile(filename, gz_mode, compresslevel)",
+        "line_number": 58,
+        "path": "/app/build/lib/python3.9/gzip.py"
+      },
+      "sink_trigger_word": "GzipFile(",
+      "sink_label": "~call_2 = ret_GzipFile(filename, gz_mode, compresslevel)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `compresslevel in gzip.py:25` is used in `gzip.py:58` for file operations.",
+      "short_description": "User data from `compresslevel in gzip.py:25` is used in `gzip.py:58` for file operations."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "compresslevel",
+        "line_number": 25,
+        "path": "/app/build/lib/python3.9/gzip.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "compresslevel",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_4 = ret_GzipFile(None, gz_mode, compresslevel, filename)",
+        "line_number": 60,
+        "path": "/app/build/lib/python3.9/gzip.py"
+      },
+      "sink_trigger_word": "GzipFile(",
+      "sink_label": "~call_4 = ret_GzipFile(None, gz_mode, compresslevel, filename)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `compresslevel in gzip.py:25` is used in `gzip.py:60` for file operations.",
+      "short_description": "User data from `compresslevel in gzip.py:25` is used in `gzip.py:60` for file operations."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "data",
+        "line_number": 542,
+        "path": "/app/build/lib/python3.9/gzip.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "data",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_f.write(data)",
+        "line_number": 548,
+        "path": "/app/build/lib/python3.9/gzip.py"
+      },
+      "sink_trigger_word": "f.write(",
+      "sink_label": "~call_2 = ret_f.write(data)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `data in gzip.py:542` is used in `gzip.py:548` for file operations.",
+      "short_description": "User data from `data in gzip.py:542` is used in `gzip.py:548` for file operations."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "file",
+        "line_number": 11,
+        "path": "/app/build/lib/python3.9/imghdr.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_open(file, rb)",
+        "line_number": 16,
+        "path": "/app/build/lib/python3.9/imghdr.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_open(file, rb)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `file in imghdr.py:11` influencing file operations in `imghdr.py:16`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `file in imghdr.py:11` influencing file operations in `imghdr.py:16`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "name",
+        "line_number": 254,
+        "path": "/app/build/lib/python3.9/imp.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "name",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_4 = ret_open(file_path, mode, encoding=encoding)",
+        "line_number": 302,
+        "path": "/app/build/lib/python3.9/imp.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_4 = ret_open(file_path, mode, encoding=encoding)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_os.path.join(entry, name)",
+          "line_number": 281,
+          "path": "/app/build/lib/python3.9/imp.py"
+        },
+        {
+          "label": "package_directory = ~call_1",
+          "line_number": 281,
+          "path": "/app/build/lib/python3.9/imp.py"
+        },
+        {
+          "label": "~call_2 = ret_os.path.join(package_directory, package_file_name)",
+          "line_number": 284,
+          "path": "/app/build/lib/python3.9/imp.py"
+        },
+        {
+          "label": "file_path = ~call_2",
+          "line_number": 284,
+          "path": "/app/build/lib/python3.9/imp.py"
+        },
+        {
+          "label": "encoding = tokenize.detect_encoding(file.readline)[0]",
+          "line_number": 301,
+          "path": "/app/build/lib/python3.9/imp.py"
+        }
+      ],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `name in imp.py:254` influencing file operations in `imp.py:302`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `name in imp.py:254` influencing file operations in `imp.py:302`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "folder",
+        "line_number": 451,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "folder",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_6 = ret_os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY, 438)",
+        "line_number": 457,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_6 = ret_os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY, 438)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_os.path.join(self._path, . + folder)",
+          "line_number": 453,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "path = ~call_1",
+          "line_number": 453,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "~call_4 = ret_os.path.join(path, maildirfolder)",
+          "line_number": 455,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "maildirfolder_path = ~call_4",
+          "line_number": 455,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        }
+      ],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `folder in mailbox.py:451` influencing file operations in `mailbox.py:457`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `folder in mailbox.py:451` influencing file operations in `mailbox.py:457`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "folder",
+        "line_number": 451,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "folder",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_6 = ret_os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY, 438)",
+        "line_number": 457,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "sink_trigger_word": "os.open(",
+      "sink_label": "~call_6 = ret_os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY, 438)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_os.path.join(self._path, . + folder)",
+          "line_number": 453,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "path = ~call_1",
+          "line_number": 453,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "~call_4 = ret_os.path.join(path, maildirfolder)",
+          "line_number": 455,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "maildirfolder_path = ~call_4",
+          "line_number": 455,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `folder in mailbox.py:451` used for constructing the command at `mailbox.py:457`.",
+      "short_description": "Remote Code Execution via shell with user data from `folder in mailbox.py:451` used for constructing the command at `mailbox.py:457`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "folder",
+        "line_number": 461,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "folder",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_6 = ret_os.rmdir(path)",
+        "line_number": 478,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "sink_trigger_word": "os.rmdir(",
+      "sink_label": "~call_6 = ret_os.rmdir(path)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_os.path.join(self._path, . + folder)",
+          "line_number": 463,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "path = ~call_1",
+          "line_number": 463,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        }
+      ],
+      "description": "User data from `folder in mailbox.py:461` is used in `mailbox.py:478` for file operations.",
+      "short_description": "User data from `folder in mailbox.py:461` is used in `mailbox.py:478` for file operations."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "folder",
+        "line_number": 1134,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "folder",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_os.remove(~call_4)",
+        "line_number": 1139,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "sink_trigger_word": "os.remove(",
+      "sink_label": "~call_3 = ret_os.remove(~call_4)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_os.path.join(self._path, folder)",
+          "line_number": 1136,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "path = ~call_1",
+          "line_number": 1136,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "~call_4 = ret_os.path.join(path, .mh_sequences)",
+          "line_number": 1139,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `folder in mailbox.py:1134` used for constructing the command at `mailbox.py:1139`.",
+      "short_description": "Remote Code Execution via shell with user data from `folder in mailbox.py:1134` used for constructing the command at `mailbox.py:1139`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "folder",
+        "line_number": 1134,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "folder",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_5 = ret_os.rmdir(path)",
+        "line_number": 1144,
+        "path": "/app/build/lib/python3.9/mailbox.py"
+      },
+      "sink_trigger_word": "os.rmdir(",
+      "sink_label": "~call_5 = ret_os.rmdir(path)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "~call_1 = ret_os.path.join(self._path, folder)",
+          "line_number": 1136,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        },
+        {
+          "label": "path = ~call_1",
+          "line_number": 1136,
+          "path": "/app/build/lib/python3.9/mailbox.py"
+        }
+      ],
+      "description": "User data from `folder in mailbox.py:1134` is used in `mailbox.py:1144` for file operations.",
+      "short_description": "User data from `folder in mailbox.py:1134` is used in `mailbox.py:1144` for file operations."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "file",
+        "line_number": 373,
+        "path": "/app/build/lib/python3.9/mimetypes.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_open(file, encoding=utf-8)",
+        "line_number": 375,
+        "path": "/app/build/lib/python3.9/mimetypes.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_open(file, encoding=utf-8)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `file in mimetypes.py:373` influencing file operations in `mimetypes.py:375`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `file in mimetypes.py:373` influencing file operations in `mimetypes.py:375`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "dir_fd",
+        "line_number": 425,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "dir_fd",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_open(top, O_RDONLY, dir_fd=dir_fd)",
+        "line_number": 464,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_3 = ret_open(top, O_RDONLY, dir_fd=dir_fd)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `dir_fd in os.py:425` influencing file operations in `os.py:464`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `dir_fd in os.py:425` influencing file operations in `os.py:464`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "buffering",
+        "line_number": 974,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "buffering",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, bufsize=buffering)",
+        "line_number": 983,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_1 = ret_subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, bufsize=buffering)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `buffering in os.py:974` used for constructing the command at `os.py:983`.",
+      "short_description": "Remote Code Execution via shell with user data from `buffering in os.py:974` used for constructing the command at `os.py:983`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "buffering",
+        "line_number": 974,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "buffering",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_6 = ret_subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, bufsize=buffering)",
+        "line_number": 989,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_6 = ret_subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, bufsize=buffering)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `buffering in os.py:974` used for constructing the command at `os.py:989`.",
+      "short_description": "Remote Code Execution via shell with user data from `buffering in os.py:974` used for constructing the command at `os.py:989`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "fd",
+        "line_number": 1019,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "fd",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_io.open(fd, *args, kwargs)",
+        "line_number": 1023,
+        "path": "/app/build/lib/python3.9/os.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_io.open(fd, *args, kwargs)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `fd in os.py:1019` influencing file operations in `os.py:1023`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `fd in os.py:1019` influencing file operations in `os.py:1023`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "newline",
+        "line_number": 1236,
+        "path": "/app/build/lib/python3.9/pathlib.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "newline",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_io.open(self, mode, buffering, encoding, errors, newline, opener=self._opener)",
+        "line_number": 1242,
+        "path": "/app/build/lib/python3.9/pathlib.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_io.open(self, mode, buffering, encoding, errors, newline, opener=self._opener)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `newline in pathlib.py:1236` influencing file operations in `pathlib.py:1242`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `newline in pathlib.py:1236` influencing file operations in `pathlib.py:1242`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "data",
+        "line_number": 1268,
+        "path": "/app/build/lib/python3.9/pathlib.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "data",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_f.write(data)",
+        "line_number": 1276,
+        "path": "/app/build/lib/python3.9/pathlib.py"
+      },
+      "sink_trigger_word": "f.write(",
+      "sink_label": "~call_1 = ret_f.write(data)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `data in pathlib.py:1268` is used in `pathlib.py:1276` for file operations.",
+      "short_description": "User data from `data in pathlib.py:1268` is used in `pathlib.py:1276` for file operations."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "filename",
+        "line_number": 94,
+        "path": "/app/build/lib/python3.9/pdb.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "filename",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_tokenize.open(filename)",
+        "line_number": 97,
+        "path": "/app/build/lib/python3.9/pdb.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_2 = ret_tokenize.open(filename)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `filename in pdb.py:94` influencing file operations in `pdb.py:97`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `filename in pdb.py:94` influencing file operations in `pdb.py:97`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "file",
+        "line_number": 152,
+        "path": "/app/build/lib/python3.9/pipes.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_open(file, r)",
+        "line_number": 156,
+        "path": "/app/build/lib/python3.9/pipes.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_open(file, r)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `file in pipes.py:152` influencing file operations in `pipes.py:156`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `file in pipes.py:152` influencing file operations in `pipes.py:156`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "file",
+        "line_number": 162,
+        "path": "/app/build/lib/python3.9/pipes.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_open(file, w)",
+        "line_number": 164,
+        "path": "/app/build/lib/python3.9/pipes.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_open(file, w)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `file in pipes.py:162` influencing file operations in `pipes.py:164`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `file in pipes.py:162` influencing file operations in `pipes.py:164`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "outfile",
+        "line_number": 170,
+        "path": "/app/build/lib/python3.9/pipes.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "outfile",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.system(~call_2)",
+        "line_number": 171,
+        "path": "/app/build/lib/python3.9/pipes.py"
+      },
+      "sink_trigger_word": "os.system(",
+      "sink_label": "~call_1 = ret_os.system(~call_2)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "temp_2_steps = outfile",
+          "line_number": 171,
+          "path": "/app/build/lib/python3.9/pipes.py"
+        },
+        {
+          "label": "list[i - 1][-1] = temp",
+          "line_number": 216,
+          "path": "/app/build/lib/python3.9/pipes.py"
+        },
+        {
+          "label": "lkind = list[i - 1][2]",
+          "line_number": 210,
+          "path": "/app/build/lib/python3.9/pipes.py"
+        },
+        {
+          "label": "rkind = list[i][2]",
+          "line_number": 211,
+          "path": "/app/build/lib/python3.9/pipes.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `outfile in pipes.py:170` used for constructing the command at `pipes.py:171`.",
+      "short_description": "Remote Code Execution via shell with user data from `outfile in pipes.py:170` used for constructing the command at `pipes.py:171`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "locals",
+        "line_number": 418,
+        "path": "/app/build/lib/python3.9/profile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "locals",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_exec(cmd, globals, locals)",
+        "line_number": 422,
+        "path": "/app/build/lib/python3.9/profile.py"
+      },
+      "sink_trigger_word": "exec(",
+      "sink_label": "~call_3 = ret_exec(cmd, globals, locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `locals in profile.py:418` used for constructing the command at `profile.py:422`.",
+      "short_description": "Remote Code Execution via shell with user data from `locals in profile.py:418` used for constructing the command at `profile.py:422`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "tty_name",
+        "line_number": 62,
+        "path": "/app/build/lib/python3.9/pty.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "tty_name",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.open(tty_name, os.O_RDWR)",
+        "line_number": 68,
+        "path": "/app/build/lib/python3.9/pty.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_os.open(tty_name, os.O_RDWR)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `tty_name in pty.py:62` influencing file operations in `pty.py:68`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `tty_name in pty.py:62` influencing file operations in `pty.py:68`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "tty_name",
+        "line_number": 62,
+        "path": "/app/build/lib/python3.9/pty.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "tty_name",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.open(tty_name, os.O_RDWR)",
+        "line_number": 68,
+        "path": "/app/build/lib/python3.9/pty.py"
+      },
+      "sink_trigger_word": "os.open(",
+      "sink_label": "~call_1 = ret_os.open(tty_name, os.O_RDWR)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `tty_name in pty.py:62` used for constructing the command at `pty.py:68`.",
+      "short_description": "Remote Code Execution via shell with user data from `tty_name in pty.py:62` used for constructing the command at `pty.py:68`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "filename",
+        "line_number": 343,
+        "path": "/app/build/lib/python3.9/pydoc.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "filename",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_tokenize.open(filename)",
+        "line_number": 359,
+        "path": "/app/build/lib/python3.9/pydoc.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_3 = ret_tokenize.open(filename)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `filename in pydoc.py:343` influencing file operations in `pydoc.py:359`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `filename in pydoc.py:343` influencing file operations in `pydoc.py:359`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "cmd",
+        "line_number": 1594,
+        "path": "/app/build/lib/python3.9/pydoc.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "cmd",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE)",
+        "line_number": 1597,
+        "path": "/app/build/lib/python3.9/pydoc.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_1 = ret_subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `cmd in pydoc.py:1594` used for constructing the command at `pydoc.py:1597`.",
+      "short_description": "Remote Code Execution via shell with user data from `cmd in pydoc.py:1594` used for constructing the command at `pydoc.py:1597`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "cmd",
+        "line_number": 1617,
+        "path": "/app/build/lib/python3.9/pydoc.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "cmd",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_os.system(cmd +  \" + filename + \")",
+        "line_number": 1624,
+        "path": "/app/build/lib/python3.9/pydoc.py"
+      },
+      "sink_trigger_word": "os.system(",
+      "sink_label": "~call_3 = ret_os.system(cmd +  \" + filename + \")",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `cmd in pydoc.py:1617` used for constructing the command at `pydoc.py:1624`.",
+      "short_description": "Remote Code Execution via shell with user data from `cmd in pydoc.py:1617` used for constructing the command at `pydoc.py:1624`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "newfile",
+        "line_number": 279,
+        "path": "/app/build/lib/python3.9/shlex.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "newfile",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "ret_sourcehook = (newfile, open(newfile, r))",
+        "line_number": 286,
+        "path": "/app/build/lib/python3.9/shlex.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "ret_sourcehook = (newfile, open(newfile, r))",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "newfile = newfile[1-1]",
+          "line_number": 282,
+          "path": "/app/build/lib/python3.9/shlex.py"
+        },
+        {
+          "label": "~call_1 = ret_os.path.join(~call_2, newfile)",
+          "line_number": 285,
+          "path": "/app/build/lib/python3.9/shlex.py"
+        },
+        {
+          "label": "newfile = ~call_1",
+          "line_number": 285,
+          "path": "/app/build/lib/python3.9/shlex.py"
+        }
+      ],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `newfile in shlex.py:279` influencing file operations in `shlex.py:286`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `newfile in shlex.py:279` influencing file operations in `shlex.py:286`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "f",
+        "line_number": 75,
+        "path": "/app/build/lib/python3.9/sndhdr.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "f",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_aifc.open(f, r)",
+        "line_number": 87,
+        "path": "/app/build/lib/python3.9/sndhdr.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_2 = ret_aifc.open(f, r)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `f in sndhdr.py:75` influencing file operations in `sndhdr.py:87`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `f in sndhdr.py:75` influencing file operations in `sndhdr.py:87`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "f",
+        "line_number": 156,
+        "path": "/app/build/lib/python3.9/sndhdr.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "f",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_wave.open(f, r)",
+        "line_number": 163,
+        "path": "/app/build/lib/python3.9/sndhdr.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_2 = ret_wave.open(f, r)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `f in sndhdr.py:156` influencing file operations in `sndhdr.py:163`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `f in sndhdr.py:156` influencing file operations in `sndhdr.py:163`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "prefix",
+        "line_number": 218,
+        "path": "/app/build/lib/python3.9/sre_constants.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "prefix",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_f.write(#define %s_%s %d\n % (prefix, item, item))",
+        "line_number": 221,
+        "path": "/app/build/lib/python3.9/sre_constants.py"
+      },
+      "sink_trigger_word": "f.write(",
+      "sink_label": "~call_2 = ret_f.write(#define %s_%s %d\n % (prefix, item, item))",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `prefix in sre_constants.py:218` is used in `sre_constants.py:221` for file operations.",
+      "short_description": "User data from `prefix in sre_constants.py:218` is used in `sre_constants.py:221` for file operations."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "targetpath",
+        "line_number": 2175,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "targetpath",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.mkdir(targetpath, 448)",
+        "line_number": 2181,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "sink_trigger_word": "os.mkdir(",
+      "sink_label": "~call_1 = ret_os.mkdir(targetpath, 448)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `targetpath in tarfile.py:2175` is used in `tarfile.py:2181` for file operations.",
+      "short_description": "User data from `targetpath in tarfile.py:2175` is used in `tarfile.py:2181` for file operations."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "targetpath",
+        "line_number": 2232,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "targetpath",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.unlink(targetpath)",
+        "line_number": 2242,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "sink_trigger_word": "os.unlink(",
+      "sink_label": "~call_1 = ret_os.unlink(targetpath)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2232` used for constructing the command at `tarfile.py:2242`.",
+      "short_description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2232` used for constructing the command at `tarfile.py:2242`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "targetpath",
+        "line_number": 2232,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "targetpath",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_os.link(tarinfo._link_target, targetpath)",
+        "line_number": 2247,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "sink_trigger_word": "os.link(",
+      "sink_label": "~call_3 = ret_os.link(tarinfo._link_target, targetpath)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `targetpath in tarfile.py:2232` is used in `tarfile.py:2247` for file operations.",
+      "short_description": "User data from `targetpath in tarfile.py:2232` is used in `tarfile.py:2247` for file operations."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "targetpath",
+        "line_number": 2258,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "targetpath",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.lchown(targetpath, u, g)",
+        "line_number": 2281,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "sink_trigger_word": "os.lchown(",
+      "sink_label": "~call_1 = ret_os.lchown(targetpath, u, g)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2258` used for constructing the command at `tarfile.py:2281`.",
+      "short_description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2258` used for constructing the command at `tarfile.py:2281`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "targetpath",
+        "line_number": 2258,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "targetpath",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_os.chown(targetpath, u, g)",
+        "line_number": 2283,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "sink_trigger_word": "os.chown(",
+      "sink_label": "~call_2 = ret_os.chown(targetpath, u, g)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2258` used for constructing the command at `tarfile.py:2283`.",
+      "short_description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2258` used for constructing the command at `tarfile.py:2283`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "targetpath",
+        "line_number": 2295,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "targetpath",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_os.utime(targetpath, (tarinfo.mtime, tarinfo.mtime))",
+        "line_number": 2301,
+        "path": "/app/build/lib/python3.9/tarfile.py"
+      },
+      "sink_trigger_word": "os.utime(",
+      "sink_label": "~call_1 = ret_os.utime(targetpath, (tarinfo.mtime, tarinfo.mtime))",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2295` used for constructing the command at `tarfile.py:2301`.",
+      "short_description": "Remote Code Execution via shell with user data from `targetpath in tarfile.py:2295` used for constructing the command at `tarfile.py:2301`."
+    },
+    {
+      "rule_id": "taint-ssrf",
+      "rule_name": "Server-Side Request Forgery (SSRF)",
+      "severity": "HIGH",
+      "cwe_category": "CWE-918",
+      "owasp_category": "a6-misconfiguration",
+      "source": {
+        "label": "timeout",
+        "line_number": 220,
+        "path": "/app/build/lib/python3.9/telnetlib.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "timeout",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_socket.create_connection((host, port), timeout)",
+        "line_number": 235,
+        "path": "/app/build/lib/python3.9/telnetlib.py"
+      },
+      "sink_trigger_word": "create_connection(",
+      "sink_label": "~call_2 = ret_socket.create_connection((host, port), timeout)",
+      "sink_type": "RequestSend",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "self.timeout = timeout",
+          "line_number": 233,
+          "path": "/app/build/lib/python3.9/telnetlib.py"
+        }
+      ],
+      "description": "Server-Side Request Forgery (SSRF) or Exfiltration with data from `timeout in telnetlib.py:220` reaching `telnetlib.py:235`.",
+      "short_description": "Server-Side Request Forgery (SSRF) or Exfiltration with data from `timeout in telnetlib.py:220` reaching `telnetlib.py:235`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "filename",
+        "line_number": 388,
+        "path": "/app/build/lib/python3.9/tokenize.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "filename",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_builtins.open(filename, rb)",
+        "line_number": 392,
+        "path": "/app/build/lib/python3.9/tokenize.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_builtins.open(filename, rb)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `filename in tokenize.py:388` influencing file operations in `tokenize.py:392`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `filename in tokenize.py:388` influencing file operations in `tokenize.py:392`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "coverdir",
+        "line_number": 204,
+        "path": "/app/build/lib/python3.9/trace.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "coverdir",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_16 = ret_os.makedirs(dir)",
+        "line_number": 261,
+        "path": "/app/build/lib/python3.9/trace.py"
+      },
+      "sink_trigger_word": "os.makedirs(",
+      "sink_label": "~call_16 = ret_os.makedirs(dir)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "dir = coverdir",
+          "line_number": 259,
+          "path": "/app/build/lib/python3.9/trace.py"
+        }
+      ],
+      "description": "User data from `coverdir in trace.py:204` is used in `trace.py:261` for file operations.",
+      "short_description": "User data from `coverdir in trace.py:204` is used in `trace.py:261` for file operations."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "encoding",
+        "line_number": 296,
+        "path": "/app/build/lib/python3.9/trace.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "encoding",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_open(path, w, encoding=encoding)",
+        "line_number": 301,
+        "path": "/app/build/lib/python3.9/trace.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_open(path, w, encoding=encoding)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `encoding in trace.py:296` influencing file operations in `trace.py:301`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `encoding in trace.py:296` influencing file operations in `trace.py:301`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "locals",
+        "line_number": 443,
+        "path": "/app/build/lib/python3.9/trace.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "locals",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_exec(cmd, globals, locals)",
+        "line_number": 450,
+        "path": "/app/build/lib/python3.9/trace.py"
+      },
+      "sink_trigger_word": "exec(",
+      "sink_label": "~call_3 = ret_exec(cmd, globals, locals)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `locals in trace.py:443` used for constructing the command at `trace.py:450`.",
+      "short_description": "Remote Code Execution via shell with user data from `locals in trace.py:443` used for constructing the command at `trace.py:450`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "in_file",
+        "line_number": 42,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "in_file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_open(in_file, rb)",
+        "line_number": 59,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_2 = ret_open(in_file, rb)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `in_file in uu.py:42` influencing file operations in `uu.py:59`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `in_file in uu.py:42` influencing file operations in `uu.py:59`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "out_file",
+        "line_number": 42,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "out_file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_open(out_file, wb)",
+        "line_number": 67,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_3 = ret_open(out_file, wb)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `out_file in uu.py:42` influencing file operations in `uu.py:67`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `out_file in uu.py:42` influencing file operations in `uu.py:67`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "in_file",
+        "line_number": 100,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "in_file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_open(in_file, rb)",
+        "line_number": 109,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_1 = ret_open(in_file, rb)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `in_file in uu.py:100` influencing file operations in `uu.py:109`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `in_file in uu.py:100` influencing file operations in `uu.py:109`."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "out_file",
+        "line_number": 100,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "out_file",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_8 = ret_open(out_file, wb)",
+        "line_number": 142,
+        "path": "/app/build/lib/python3.9/uu.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_8 = ret_open(out_file, wb)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `out_file in uu.py:100` influencing file operations in `uu.py:142`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `out_file in uu.py:100` influencing file operations in `uu.py:142`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 172,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_subprocess.Popen(cmdline)",
+        "line_number": 178,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_2 = ret_subprocess.Popen(cmdline)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "cmdline = [self.name] + [arg.replace(%s, url) for arg in self.args]",
+          "line_number": 174,
+          "path": "/app/build/lib/python3.9/webbrowser.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:172` used for constructing the command at `webbrowser.py:178`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:172` used for constructing the command at `webbrowser.py:178`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 172,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_subprocess.Popen(cmdline, close_fds=True)",
+        "line_number": 180,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_3 = ret_subprocess.Popen(cmdline, close_fds=True)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "cmdline = [self.name] + [arg.replace(%s, url) for arg in self.args]",
+          "line_number": 174,
+          "path": "/app/build/lib/python3.9/webbrowser.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:172` used for constructing the command at `webbrowser.py:180`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:172` used for constructing the command at `webbrowser.py:180`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 190,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_subprocess.Popen(cmdline)",
+        "line_number": 196,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_2 = ret_subprocess.Popen(cmdline)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "cmdline = [self.name] + [arg.replace(%s, url) for arg in self.args]",
+          "line_number": 191,
+          "path": "/app/build/lib/python3.9/webbrowser.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:190` used for constructing the command at `webbrowser.py:196`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:190` used for constructing the command at `webbrowser.py:196`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 190,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_3 = ret_subprocess.Popen(cmdline, close_fds=True, start_new_session=True)",
+        "line_number": 198,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_3 = ret_subprocess.Popen(cmdline, close_fds=True, start_new_session=True)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "cmdline = [self.name] + [arg.replace(%s, url) for arg in self.args]",
+          "line_number": 191,
+          "path": "/app/build/lib/python3.9/webbrowser.py"
+        }
+      ],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:190` used for constructing the command at `webbrowser.py:198`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:190` used for constructing the command at `webbrowser.py:198`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 358,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_subprocess.Popen([kfmclient, action, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull)",
+        "line_number": 369,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_2 = ret_subprocess.Popen([kfmclient, action, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:369`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:369`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 358,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_4 = ret_subprocess.Popen([konqueror, --silent, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull, start_new_session=True)",
+        "line_number": 381,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_4 = ret_subprocess.Popen([konqueror, --silent, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull, start_new_session=True)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:381`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:381`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 358,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_5 = ret_subprocess.Popen([kfm, -d, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull, start_new_session=True)",
+        "line_number": 394,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "subprocess.Popen(",
+      "sink_label": "~call_5 = ret_subprocess.Popen([kfm, -d, url], close_fds=True, stdin=devnull, stdout=devnull, stderr=devnull, start_new_session=True)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:394`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:358` used for constructing the command at `webbrowser.py:394`."
+    },
+    {
+      "rule_id": "taint-rce",
+      "rule_name": "Remote Code Execution",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-78",
+      "owasp_category": "a1-injection",
+      "source": {
+        "label": "url",
+        "line_number": 600,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "url",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_os.startfile(url)",
+        "line_number": 603,
+        "path": "/app/build/lib/python3.9/webbrowser.py"
+      },
+      "sink_trigger_word": "os.startfile(",
+      "sink_label": "~call_2 = ret_os.startfile(url)",
+      "sink_type": "RemoteCodeExecution",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "Remote Code Execution via shell with user data from `url in webbrowser.py:600` used for constructing the command at `webbrowser.py:603`.",
+      "short_description": "Remote Code Execution via shell with user data from `url in webbrowser.py:600` used for constructing the command at `webbrowser.py:603`."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "source",
+        "line_number": 76,
+        "path": "/app/build/lib/python3.9/zipapp.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "source",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_1 = ret_pathlib.Path(source)",
+        "line_number": 101,
+        "path": "/app/build/lib/python3.9/zipapp.py"
+      },
+      "sink_trigger_word": "Path(",
+      "sink_label": "~call_1 = ret_pathlib.Path(source)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `source in zipapp.py:76` is used in `zipapp.py:101` for file operations.",
+      "short_description": "User data from `source in zipapp.py:76` is used in `zipapp.py:101` for file operations."
+    },
+    {
+      "rule_id": "taint-file-write",
+      "rule_name": "File Write",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-732",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "target",
+        "line_number": 76,
+        "path": "/app/build/lib/python3.9/zipapp.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "target",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_18 = ret_pathlib.Path(target)",
+        "line_number": 132,
+        "path": "/app/build/lib/python3.9/zipapp.py"
+      },
+      "sink_trigger_word": "Path(",
+      "sink_label": "~call_18 = ret_pathlib.Path(target)",
+      "sink_type": "FileSystem",
+      "type": "Vulnerability",
+      "reassignment_nodes": [],
+      "description": "User data from `target in zipapp.py:76` is used in `zipapp.py:132` for file operations.",
+      "short_description": "User data from `target in zipapp.py:76` is used in `zipapp.py:132` for file operations."
+    },
+    {
+      "rule_id": "taint-traversal",
+      "rule_name": "Directory Traversal",
+      "severity": "CRITICAL",
+      "cwe_category": "CWE-22",
+      "owasp_category": "a5-broken-access-control",
+      "source": {
+        "label": "mode",
+        "line_number": 2298,
+        "path": "/app/build/lib/python3.9/zipfile.py"
+      },
+      "source_trigger_word": "Framework function URL parameter",
+      "source_label": "mode",
+      "source_type": "Framework_Parameter",
+      "sink": {
+        "label": "~call_2 = ret_self.root.open(self.at, zip_mode, pwd=pwd)",
+        "line_number": 2306,
+        "path": "/app/build/lib/python3.9/zipfile.py"
+      },
+      "sink_trigger_word": "open(",
+      "sink_label": "~call_2 = ret_self.root.open(self.at, zip_mode, pwd=pwd)",
+      "sink_type": "Exfiltration",
+      "type": "Vulnerability",
+      "reassignment_nodes": [
+        {
+          "label": "zip_mode = mode[0]",
+          "line_number": 2305,
+          "path": "/app/build/lib/python3.9/zipfile.py"
+        }
+      ],
+      "description": "Exfiltration of data (Path Traversal) due to user data from `mode in zipfile.py:2298` influencing file operations in `zipfile.py:2306`.",
+      "short_description": "Exfiltration of data (Path Traversal) due to user data from `mode in zipfile.py:2298` influencing file operations in `zipfile.py:2306`."
+    }
+  ]
+}
